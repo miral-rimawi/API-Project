@@ -39,7 +39,7 @@ namespace KASHOP.PL.Controllers
         }
 
         [HttpGet("")]
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             var categories = await _categoryService.GetAllCategories();
         
@@ -48,5 +48,10 @@ namespace KASHOP.PL.Controllers
                 _localizer["Success"].Value });
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return Ok(await _categoryService.GetCategory(c => c.Id == id));
+        }
     }
 }
